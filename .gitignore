@@ -1,3 +1,14 @@
+# Monster-AutoUploader Specifics
+Instagram Videos/*
+!Instagram Videos/.gitkeep
+
+Snapchat Videos/*
+!Snapchat Videos/.gitkeep
+
+TikTok Videos/*
+!TikTok Videos/.gitkeep
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
