@@ -1,12 +1,21 @@
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
 import argparse
+from data_logger import DataLogger
 import time
 import datetime
-from dateutil.tz import *
 import os
 import sys
 
+from dateutil.tz import *
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+
+VIDEO_FOLDER = os.getcwd() + "/TikTok Videos"
+
+def get_video_number(video):
+    pass
+
+def get_video_name(video):
+    pass
 
 class TikTokBot:
     def __init__(self):
@@ -14,7 +23,26 @@ class TikTokBot:
         self.driver = webdriver.Chrome(f'{path}/chromedriver')
         self.executor_url = self.driver.command_executor._url
         self.session_id = self.driver.session_id
+        self.videos = self.refresh_videos()
         print(self.executor_url, self.session_id)
+
+    def refresh_videos(self):
+        videos = os.listdir(VIDEO_FOLDER)
+
+        for file in videos:
+            if file.endswith(".txt") or file.endswith(".gitkeep"):
+                videos.remove(file)
+            
+        return self.order_videos(videos)
+
+    def order_videos(self, videos):
+        '''
+        Orders videos using prefix
+        ex: [0] videoname.mov
+        '''
+
+
+        pass
 
     def upload_video(self, who_can_view, video_path, date_time, caption):
         self.driver.get('https://tiktok.com')
@@ -116,7 +144,8 @@ class TikTokBot:
         sys.exit()
 
 
-def main():
+def main():    
+    DataLogger.greeting()
     parser = argparse.ArgumentParser(description='This bot allows you to upload your TikTok videos at a set time, as long as you login.')
     parser.add_argument("--privacy", choices=['Private', 'Friends only', 'Public'], help="Private, Friends only, or Public", required=True)
     parser.add_argument("--video_path", help="Absolute path to video, i.e. /Users/username/Downloads/IMG_1648.MOV", required=True)
