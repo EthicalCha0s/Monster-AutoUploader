@@ -1,1 +1,3 @@
 # Monster-AutoUploader
+
+TikTok banned me :/...
